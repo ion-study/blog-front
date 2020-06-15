@@ -16,14 +16,10 @@
             </p>
             <div class="btn-wrap">
               <div class="links">
-                 <nuxt-link to="/board/regist" class="button--green">
-                   게시글 등록
-                 </nuxt-link>
+                 <b-button block variant="outline-info" href="/board/regist">게시글 등록</b-button>
               </div>
               <div class="links pb30">
-                 <nuxt-link to="/category/regist" class="button--grey">
-                    카테고리 등록
-                 </nuxt-link>
+                <b-button block variant="outline-secondary" href="/category/regist">카테고리 등록</b-button>
               </div>
             </div>
           </div>
@@ -45,9 +41,7 @@
             <p class="pt30"><span class="c-green">아직 작성된 글이 없습니다.</span> <br/>문득 스치는 생각이나 기분, 일기 등 다양한 이야기로
                나만의 공간을 채워보세요!</p>
                <div class="links pb30">
-                 <nuxt-link to="/board/regist" class="button--green">
-                   게시글 등록
-                 </nuxt-link>
+                 <b-button variant="outline-info" href="/board/regist">게시글 등록</b-button>
                </div>
              </div>
           </div>
