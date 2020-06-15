@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <div class="header">
-        <h2>I-ON blog project - main 화면</h2>
+        <h2>I-ON blog project</h2>
       </div>
       <nuxt />
       <div class="footer">
@@ -65,6 +65,13 @@ html {
   background-color: #35495e;
 }
 
+.container {
+  margin: 0 auto;
+  //min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 .header{
   width:100%;
   margin: 20px 0;
@@ -77,6 +84,7 @@ html {
   text-align:right;
   border:1px solid #acacac;
 }
+
 .c-green{
   color:#3b8070;
 }

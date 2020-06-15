@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <div class="header">
-      <h2>I-ON blog project - 카테고리 등록 화면</h2>
-    </div>
+
     <div class="reg-contents">
 
     </div>
