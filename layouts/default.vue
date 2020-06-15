@@ -1,6 +1,14 @@
 <template>
-  <div>
-    <nuxt />
+  <div class="container">
+    <div>
+      <div class="header">
+        <h2>I-ON blog project - main 화면</h2>
+      </div>
+      <nuxt />
+      <div class="footer">
+        <h5>I-ON Communications - daisy / jayden / ann</h5>
+      </div>
+    </div>
   </div>
 </template>
 
