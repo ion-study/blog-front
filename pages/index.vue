@@ -1,6 +1,10 @@
 <template>
   <div class="container">
     <div>
+      <!-- <logo /> -->
+      <div class="header">
+        <h2>I-ON blog project - main 화면</h2>
+      </div>
       <div class="contents-wrap">
         <div class="aside">
           <div class="profile">
@@ -18,7 +22,7 @@
               </div>
               <div class="links pb30">
                  <nuxt-link to="/category/regist" class="button--grey">
-                    카테고리 관리
+                    카테고리 등록
                  </nuxt-link>
               </div>
             </div>
@@ -48,6 +52,9 @@
              </div>
           </div>
         </div>
+      </div>
+      <div class="footer">
+        <h5>I-ON Communications - daisy / jayden / ann</h5>
       </div>
     </div>
   </div>
@@ -84,14 +91,15 @@ export default {
 .aside .profile{
   width:200px;
   display: block;
+  border: 1px solid #acacac;
 
 }
 .aside .profile .image{
 text-align: center;
 border-radius:10px;
 border: 1px solid #acacac;
-min-height:187px;
-line-height:187px;
+min-height:180px;
+line-height:180px;
 }
 
 .profile-txt{
