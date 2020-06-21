@@ -1,33 +1,24 @@
 <template>
   <div class="container">
-    <h2 class="reg-tit">게시글 등록</h2>
+    <h2 class="reg-tit">게시글 조회</h2>
     <div class="reg-contents">
-
-      <form action="view" method="get">
-          <input type="hidden" name="boardId" id="boardId">
-          <input type="hidden" name="catId" id="catId">
-
           <div class="board-box">
             <table>
               <tr>
                 <td>아이디</td>
-                <td><input type="text" name="userId" id="userId" size="98"></td>
+                <td id="userId"></td>
               </tr>
               <tr>
                 <td>제목</td>
-                <td><input type="text" value="" name="subject" id="subject" size="98"></td>
+                <td id="subject"></td>
               </tr>
               <tr>
                 <td>내용</td>
-                <td><textarea name="contents" id="contents" cols="100" rows="10"></textarea></td>
+                <td id="contents"></td>
               </tr>
             </table>
-           <div class="button-wrap">
-            <input type="button" name="cancel" onclick="javascript:history.back();" class="button--grey" value="취소">
-            <input type="submit" name="submit" class="button--green" onclick="javascript:testList();" value="등록">
-           </div>
+
           </div>
-      </form>
     </div>
   </div>
 
@@ -64,3 +55,6 @@
     }
 
 </style>
+<script>
+
+</script>
