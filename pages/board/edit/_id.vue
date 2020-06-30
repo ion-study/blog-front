@@ -14,7 +14,7 @@
           </tr>
           <tr>
             <td><label for="contents">내용</label></td>
-            <td><textarea name="contents" id="contents" v-model="newContent"></textarea></td>
+            <td><textarea name="contents" id="contents" v-model="newContent" /></td>
           </tr>
         </table>
         <div class="button-wrap">
@@ -28,7 +28,7 @@
 
 <script>
   export default {
-    validate ({ params }) {
+    validate ({params}) {
       // Must be a number
       return /^\d+$/.test(params.id)
     },
@@ -52,7 +52,7 @@
           this.$axios.$patch(`http://localhost:8080/boards/${this.$route.params.id}`, {
             subject: this.newSubject,
             contents: this.newContent
-          }).then(()=>{
+          }).then(() => {
             console.log('success')
           })
         } else {
@@ -61,7 +61,7 @@
       }
     },
     created () {
-      this.$axios.$get(`http://localhost:8080/boards/${this.$route.params.id}`).then(res=>{
+      this.$axios.$get(`http://localhost:8080/boards/${this.$route.params.id}`).then(res => {
         console.log(res)
         this.postObj = res
       })
@@ -71,33 +71,42 @@
 
 <style>
   .reg-tit {
-    text-align:left; padding:20px 0; border-bottom:1px solid #acacac;
+    text-align: left;
+    padding: 20px 0;
+    border-bottom: 1px solid #acacac;
   }
+
   .reg-contents {
-    width:100%;
-    margin:0 auto;
-    padding :30px 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px 0;
 
   }
-  .board-box{
-    width:100%;
-    max-width:1024px;
-    margin:0 auto;
+
+  .board-box {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
   }
-  .board-box table{
-    width:100%;
+
+  .board-box table {
+    width: 100%;
   }
-  .board-box table tr{
-    border:1px solid #acacac;
+
+  .board-box table tr {
+    border: 1px solid #acacac;
   }
-  .board-box table tr td{
-    border:1px solid #acacac;
+
+  .board-box table tr td {
+    border: 1px solid #acacac;
   }
-  .board-box table tr td:first-child{
-    width:120px;
+
+  .board-box table tr td:first-child {
+    width: 120px;
   }
-  .button-wrap{
-    margin:10px 0;
+
+  .button-wrap {
+    margin: 10px 0;
   }
 
 </style>

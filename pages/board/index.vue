@@ -12,16 +12,18 @@
 <script>
   export default {
     name: "index",
+    asyncData () {
+      let data = this.$axios.$get('http://localhost:8080/boards/').then(res=>{
+        console.log(res)
+      })
+      return {
+        boardList: data
+      }
+    },
     data () {
       return {
         boardList: []
       }
-    },
-    created () {
-      this.$axios.$get('http://localhost:8080/boards/').then(res=>{
-        console.log(res)
-        this.boardList = res
-      })
     }
   }
 </script>
