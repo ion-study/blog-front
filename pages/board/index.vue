@@ -3,7 +3,7 @@
     <h1>게시글 리스트</h1>
     <div>
       <ul>
-        <li v-for="post in boardList">{{post.userId}} : <nLink :to="`board/view/${post.id}`"></nLink>{{post.title}} / {{post.createdDate}}</li>
+        <li v-for="post in boardList" :key="post.id">{{post.userId}} : <nLink :to="`board/view/${post.id}`"></nLink>{{post.title}} / {{post.createdDate}}</li>
       </ul>
     </div>
   </div>
