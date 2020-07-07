@@ -6,19 +6,19 @@
         <table>
           <tr>
             <td><label for="userId">아이디</label></td>
-            <td><input type="text" name="userId" id="userId" v-model="userId"></td>
+            <td><input type="text" name="userId" id="userId" v-model="registObj.userId"></td>
           </tr>
           <tr>
             <td><label for="subject">제목</label></td>
-            <td><input type="text" value="" name="subject" id="subject" v-model="subject"></td>
+            <td><input type="text" value="" name="subject" id="subject" v-model="registObj.subject"></td>
           </tr>
           <tr>
             <td><label for="contents">내용</label></td>
-            <td><textarea name="contents" id="contents" v-model="content"></textarea></td>
+            <td><textarea name="contents" id="contents" v-model="registObj.contents"></textarea></td>
           </tr>
         </table>
         <div class="button-wrap">
-          <button type="button" @click="post">등록</button>
+          <button type="button" @click="regist">등록</button>
         </div>
       </div>
     </div>
@@ -30,25 +30,20 @@
     name: 'regist',
     data () {
       return {
-        userId: '',
-        subject: '',
-        content: ''
+        registObj: {
+          userId: '',
+          subject: '',
+          contents: ''
+        }
       }
     },
     methods: {
-      post () {
-        console.log('post')
-        if (this.userId && this.subject && this.content) {
-          this.$axios.$post(`http://localhost:8080/boards/`, {
-            userId: this.userId,
-            subject: this.subject,
-            contents: this.content
-          }).then(()=>{
-            console.log('success')
-          })
-        } else {
-          alert('error')
-        }
+      regist () {
+        console.log('regist')
+        this.$axios.$post('boards', this.registObj).then(() => {
+          console.log('success')
+          this.$router.push('/board')
+        })
       }
     }
   }

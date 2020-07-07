@@ -3,7 +3,7 @@
     <h1>게시글 리스트</h1>
     <div>
       <ul>
-        <li v-for="post in boardList" :key="post.id">[{{post.boardId}}] / {{post.userId}} / {{post.subject}} / {{post.createdDate}}<nLink :to="`board/view/${post.id}`"></nLink></li>
+        <li v-for="post in boardList" :key="post.boardId"><nLink :to="`board/view/${post.boardId}`">[{{post.boardId}}] / {{post.userId}} / {{post.subject}} / {{post.createdDate}}</nLink></li>
       </ul>
     </div>
   </div>
@@ -14,9 +14,13 @@
     name: "index",
     async asyncData ({ app }) {
       let data  = await app.$axios.$get('boards')
-      console.log(data)
       return {
         boardList: data
+      }
+    },
+    data () {
+      return {
+        boardList:[]
       }
     }
   }
