@@ -7,23 +7,30 @@
           <tbody>
           <tr>
             <td>게시글 ID (삭제예정)</td>
-            <td>{{$route.params.id}}</td>
+            <td>{{postObj.boardId}}</td>
           </tr>
           <tr>
             <td>아이디</td>
-            <td id="userId"></td>
+            <td>{{postObj.userId}}</td>
           </tr>
           <tr>
             <td>제목</td>
-            <td id="subject"></td>
+            <td>{{postObj.subject}}</td>
           </tr>
           <tr>
             <td>내용</td>
-            <td id="contents"></td>
+            <td>{{postObj.contents}}</td>
           </tr>
           </tbody>
         </table>
-
+        <!-- 하단 버튼 -->
+        <div class="mt-3">
+          <b-button-group>
+            <b-button variant="info" @click="editPost">수정</b-button>
+            <b-button variant="warning" @click="deletePost">삭제</b-button>
+            <b-button variant="secondary" @click="$router.push('/board')">목록으로</b-button>
+          </b-button-group>
+        </div>
       </div>
     </div>
   </div>
@@ -36,16 +43,26 @@
       // Must be a number
       return /^\d+$/.test(params.id)
     },
+    async asyncData ({ app, params }) {
+      let data  = await app.$axios.$get(`boards/${params.id}`)
+      // console.log(data)
+      return {
+        postObj: data
+      }
+    },
     data () {
       return {
         postObj: {}
       }
     },
-    created () {
-      this.$axios.$get(`http://localhost:8080/boards/${this.$route.params.id}`).then(res=>{
-        console.log(res)
-        this.postObj = res
-      })
+    methods: {
+      editPost () {
+        this.$router.push(`/board/edit/${this.postObj.boardId}`)
+      },
+      deletePost () {
+        // 오류
+        this.$axios.$delete(`boards/${this.postObj.boardId}`)
+      }
     }
   }
 </script>

@@ -2,23 +2,29 @@
   <div class="container">
     <h2 class="reg-tit">게시글 수정</h2>
     <div class="reg-contents">
+      {{ postObj }}
+      <br>
+      <br>
+      {{ updateObj }}
       <div class="board-box">
         <table>
+          <tbody>
           <tr>
             <td>아이디</td>
             <td>{{postObj.userId}}</td>
           </tr>
           <tr>
             <td><label for="subject">제목</label></td>
-            <td><input type="text" value="" name="subject" id="subject" v-model="newSubject"></td>
+            <td><input type="text" value="" name="subject" id="subject" v-model="updateObj.subject"></td>
           </tr>
           <tr>
             <td><label for="contents">내용</label></td>
-            <td><textarea name="contents" id="contents" v-model="newContent" /></td>
+            <td><textarea name="contents" id="contents" v-model="updateObj.contents" /></td>
           </tr>
+          </tbody>
         </table>
         <div class="button-wrap">
-          <button type="button" @click="edit">저장</button>
+          <b-button variant="primary" @click="edit">저장</b-button>
         </div>
       </div>
     </div>
@@ -32,39 +38,35 @@
       // Must be a number
       return /^\d+$/.test(params.id)
     },
+    async asyncData ({ app, params }) {
+      let data  = await app.$axios.$get(`boards/${params.id}`)
+      // console.log(data)
+      return {
+        postObj: data
+      }
+    },
     data () {
       return {
         postObj: {},
-      }
-    },
-    computed: {
-      newSubject () {
-        return this.oriPost.subject
-      },
-      newContent () {
-        return this.oriPost.contents
+        updateObj: {
+          subject: '',
+          contents: ''
+        }
       }
     },
     methods: {
       edit () {
+        // 오류
         console.log('edit')
-        if (this.userId && this.subject && this.content) {
-          this.$axios.$patch(`http://localhost:8080/boards/${this.$route.params.id}`, {
-            subject: this.newSubject,
-            contents: this.newContent
-          }).then(() => {
-            console.log('success')
-          })
-        } else {
-          alert('error')
-        }
+        this.$axios.$patch(`boards/${this.postObj.boardId}`, this.updateObj).then(() => {
+          console.log('success')
+          this.$router.push('/board')
+        })
       }
     },
     created () {
-      this.$axios.$get(`http://localhost:8080/boards/${this.$route.params.id}`).then(res => {
-        console.log(res)
-        this.postObj = res
-      })
+      this.updateObj.subject = this.postObj.subject
+      this.updateObj.contents = this.postObj.contents
     }
   }
 </script>
