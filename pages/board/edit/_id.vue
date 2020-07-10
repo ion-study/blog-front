@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <h2 class="reg-tit">게시글 수정</h2>
+    <h2 class="reg-tit">
+      게시글 수정
+    </h2>
     <div class="reg-contents">
       {{ postObj }}
       <br>
@@ -9,66 +11,67 @@
       <div class="board-box">
         <table>
           <tbody>
-          <tr>
-            <td>아이디</td>
-            <td>{{postObj.userId}}</td>
-          </tr>
-          <tr>
-            <td><label for="subject">제목</label></td>
-            <td><input type="text" value="" name="subject" id="subject" v-model="updateObj.subject"></td>
-          </tr>
-          <tr>
-            <td><label for="contents">내용</label></td>
-            <td><textarea name="contents" id="contents" v-model="updateObj.contents" /></td>
-          </tr>
+            <tr>
+              <td>아이디</td>
+              <td>{{ postObj.userId }}</td>
+            </tr>
+            <tr>
+              <td><label for="subject">제목</label></td>
+              <td><input id="subject" v-model="updateObj.subject" type="text" value="" name="subject"></td>
+            </tr>
+            <tr>
+              <td><label for="contents">내용</label></td>
+              <td><textarea id="contents" v-model="updateObj.contents" name="contents" /></td>
+            </tr>
           </tbody>
         </table>
         <div class="button-wrap">
-          <b-button variant="primary" @click="edit">저장</b-button>
+          <b-button variant="primary" @click="edit">
+            저장
+          </b-button>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
-  export default {
-    validate ({params}) {
-      // Must be a number
-      return /^\d+$/.test(params.id)
-    },
-    async asyncData ({ app, params }) {
-      let data  = await app.$axios.$get(`boards/${params.id}`)
-      // console.log(data)
-      return {
-        postObj: data
+export default {
+  validate ({ params }) {
+    // Must be a number
+    return /^\d+$/.test(params.id)
+  },
+  async asyncData ({ app, params }) {
+    const data = await app.$axios.$get(`boards/${params.id}`)
+    // console.log(data)
+    return {
+      postObj: data
+    }
+  },
+  data () {
+    return {
+      postObj: {},
+      updateObj: {
+        subject: '',
+        contents: ''
       }
-    },
-    data () {
-      return {
-        postObj: {},
-        updateObj: {
-          subject: '',
-          contents: ''
-        }
-      }
-    },
-    methods: {
-      edit () {
-        // 오류
-        console.log('edit')
-        this.$axios.$patch(`boards/${this.postObj.boardId}`, this.updateObj).then(() => {
-          console.log('success')
-          this.$router.push('/board')
-        })
-      }
-    },
-    created () {
-      this.updateObj.subject = this.postObj.subject
-      this.updateObj.contents = this.postObj.contents
+    }
+  },
+  created () {
+    this.updateObj.subject = this.postObj.subject
+    this.updateObj.contents = this.postObj.contents
+  },
+  methods: {
+    edit () {
+      // 오류
+      console.log('edit')
+      this.$axios.$patch(`boards/${this.postObj.boardId}`, this.updateObj).then(() => {
+        console.log('success')
+        this.$router.push('/board')
+      })
     }
   }
+}
 </script>
 
 <style>

@@ -1,52 +1,55 @@
 <template>
   <div class="container">
-    <h2 class="reg-tit">게시글 등록</h2>
+    <h2 class="reg-tit">
+      게시글 등록
+    </h2>
     <div class="reg-contents">
       <div class="board-box">
         <table>
           <tr>
             <td><label for="userId">아이디</label></td>
-            <td><input type="text" name="userId" id="userId" v-model="registObj.userId"></td>
+            <td><input id="userId" v-model="registObj.userId" type="text" name="userId"></td>
           </tr>
           <tr>
             <td><label for="subject">제목</label></td>
-            <td><input type="text" value="" name="subject" id="subject" v-model="registObj.subject"></td>
+            <td><input id="subject" v-model="registObj.subject" type="text" value="" name="subject"></td>
           </tr>
           <tr>
             <td><label for="contents">내용</label></td>
-            <td><textarea name="contents" id="contents" v-model="registObj.contents"></textarea></td>
+            <td><textarea id="contents" v-model="registObj.contents" name="contents" /></td>
           </tr>
         </table>
         <div class="button-wrap">
-          <button type="button" @click="regist">등록</button>
+          <button type="button" @click="regist">
+            등록
+          </button>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 <script>
-  export default {
-    name: 'regist',
-    data () {
-      return {
-        registObj: {
-          userId: '',
-          subject: '',
-          contents: ''
-        }
-      }
-    },
-    methods: {
-      regist () {
-        console.log('regist')
-        this.$axios.$post('boards', this.registObj).then(() => {
-          console.log('success')
-          this.$router.push('/board')
-        })
+export default {
+  name: 'Regist',
+  data () {
+    return {
+      registObj: {
+        userId: '',
+        subject: '',
+        contents: ''
       }
     }
+  },
+  methods: {
+    regist () {
+      console.log('regist')
+      this.$axios.$post('boards', this.registObj).then(() => {
+        console.log('success')
+        this.$router.push('/board')
+      })
+    }
   }
+}
 </script>
 <style>
   .reg-tit {
