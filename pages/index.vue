@@ -5,7 +5,7 @@
         <div class="aside">
           <div class="profile">
             <p class="image">
-              <img src="~assets/img/man.png">
+              <img src="~assets/img/man.png" />
             </p>
             <p class="profile-txt">
               <span>홍길동</span>의 블로그 입니다.
@@ -23,16 +23,7 @@
               </div>
             </div>
           </div>
-          <div class="menu-category">
-            <h5>카테고리</h5>
-            <ul>
-              <li>카테고리1</li>
-              <li>카테고리2</li>
-              <li>카테고리3</li>
-              <li>카테고리4</li>
-
-            </ul>
-          </div>
+          <category :catList="catList" />
         </div>
         <div class="contents">
 
@@ -54,8 +45,24 @@
 </template>
 
 <script>
-
+  import category from '~/components/common/category'
+  export default {
+    components: {category},
+    async asyncData ({ app }) {
+      const data = await app.$axios.$get('categories?blogId=1') // 아직 블로그id 관리 X
+      // console.log(data)
+      return {
+        catList: data
+      }
+    },
+    data () {
+      return {
+        catList: []
+      }
+    }
+  }
 </script>
+
 
 <style>
   .contents-wrap {

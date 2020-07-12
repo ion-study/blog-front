@@ -28,15 +28,9 @@
         <!-- 하단 버튼 -->
         <div class="mt-3">
           <b-button-group>
-            <b-button variant="info" @click="editPost">
-              수정
-            </b-button>
-            <b-button variant="warning" @click="deletePost">
-              삭제
-            </b-button>
-            <b-button variant="secondary" @click="$router.push('/board')">
-              목록으로
-            </b-button>
+            <b-button variant="info" @click="editPost">수정</b-button>
+            <b-button variant="warning" @click="deletePost">삭제</b-button>
+            <b-button variant="secondary" @click="$router.push('/board')">목록으로</b-button>
           </b-button-group>
         </div>
       </div>
@@ -67,8 +61,13 @@ export default {
       this.$router.push(`/board/edit/${this.postObj.boardId}`)
     },
     deletePost () {
-      // 오류
-      this.$axios.$delete(`boards/${this.postObj.boardId}`)
+      let deleteConform = confirm("게시글을 삭제하시겠습니까?")
+      if(deleteConform)  {
+        this.$axios.$delete(`boards/${this.postObj.boardId}`).then(()=>{
+          alert("게시글이 성공적으로 삭제되었습니다. 목록으로 이동합니다.")
+          this.$router.push('/board')
+        })
+      }
     }
   }
 }

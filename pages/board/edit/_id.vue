@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2 class="reg-tit">
-      게시글 수정
+      게시글 수정 (미완)
     </h2>
     <div class="reg-contents">
       {{ postObj }}
@@ -21,14 +21,16 @@
             </tr>
             <tr>
               <td><label for="contents">내용</label></td>
-              <td><textarea id="contents" v-model="updateObj.contents" name="contents" /></td>
+              <td><textarea id="contents" v-model="updateObj.contents" name="contents"></textarea></td>
             </tr>
           </tbody>
         </table>
-        <div class="button-wrap">
-          <b-button variant="primary" @click="edit">
-            저장
-          </b-button>
+        <!-- 하단 버튼 -->
+        <div class="mt-3">
+          <b-button-group>
+            <b-button variant="info" @click="edit">저장</b-button>
+            <b-button variant="secondary" @click="$router.back()">취소</b-button>
+          </b-button-group>
         </div>
       </div>
     </div>

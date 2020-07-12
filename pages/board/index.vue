@@ -4,15 +4,19 @@
     <div>
       <ul>
         <li v-for="post in boardList" :key="post.boardId">
-          [{{ post.boardId }}] / {{ post.userId }} / {{ post.subject }} /
-          {{ post.createdDate }}
-          <nLink :to="`board/view/${post.boardId}`" />
-          <button @click="updateTest(post.boardId)">
-            [삭제]
-          </button>
+          <nLink :to="`board/view/${post.boardId}`">
+          [{{ post.boardId }}] / {{ post.userId }} / {{ post.subject }} / {{ post.createdDate }}
+          </nLink>
+          <b-btn-group>
+            <b-button variant="danger" @click="deletePost(post.boardId)">삭제</b-button>
+            <b-button variant="info" @click="$router.push(`/board/edit/${post.boardId}`)">수정</b-button>
+          </b-btn-group>
         </li>
       </ul>
     </div>
+    <b-button-group>
+      <b-button variant="primary" @click="$router.push('/board/regist')">글쓰기</b-button>
+    </b-button-group>
   </div>
 </template>
 
@@ -26,11 +30,32 @@ export default {
       boardList: data
     }
   },
+  data () {
+    return {
+      boardList: []
+    }
+  },
   methods: {
-    async updateTest (id) {
-      // let data2 = await this.$axios({method: 'delete', url:`boards/${id}`}) // delete test
-      // let data2 = await this.$axios.$patch(`boards/${id}`, {"subject": "axios subject수정", "contents": "axios content수정"}); // update test
-      // console.log(data2)
+    updateTest (id) {
+      let bodyData = {
+        "boardId": id,
+        "subject": "axios subject수정",
+        "contents": "axios content수정"
+      }
+      this.$axios.$patch(`boards`, bodyData).then(()=>{
+        console.log(bodyData)
+      })
+    },
+    deletePost (boardId) {
+      let deleteConform = confirm("게시글을 삭제하시겠습니까?")
+      if(deleteConform)  {
+        this.$axios.$delete(`boards/${boardId}`).then(()=>{
+          alert("게시글이 성공적으로 삭제되었습니다.")
+          this.$axios.$get('boards').then((res)=>{
+            this.boardList = res
+          })
+        })
+      }
     }
   }
 }

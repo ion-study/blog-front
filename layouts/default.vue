@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <div class="header">
-        <h2>I-ON blog project</h2>
+        <h2><nLink to="/">I-ON blog project</nLink></h2>
       </div>
       <nuxt />
       <div class="footer">
