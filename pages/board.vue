@@ -1,6 +1,6 @@
 <template>
   <div>
-    <category :catList="catList" />
+    <lnb :catList="catList" />
 <!--    <pre style="text-align:left;">-->
 <!--    {{catList}}-->
 <!--    </pre>-->
@@ -9,13 +9,13 @@
 </template>
 
 <script>
-  import category from '~/components/common/category'
+  import lnb from '~/components/common/lnb'
   export default {
     name: "board",
-    components: {category},
+    components: {lnb},
     async asyncData ({ app }) {
       const data = await app.$axios.$get('categories?blogId=1') // 아직 블로그id 관리 X
-      // console.log(data)
+      console.log(data)
       return {
         catList: data
       }

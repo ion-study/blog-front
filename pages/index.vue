@@ -17,13 +17,13 @@
                 </nuxt-link>
               </div>
               <div class="links pb30">
-                <nuxt-link to="/category/regist" class="button--grey">
-                  카테고리 등록
+                <nuxt-link to="/category" class="button--grey">
+                  카테고리 관리
                 </nuxt-link>
               </div>
             </div>
           </div>
-          <category :catList="catList" />
+          <lnb :catList="catList" />
         </div>
         <div class="contents">
 
@@ -45,9 +45,9 @@
 </template>
 
 <script>
-  import category from '~/components/common/category'
+  import lnb from '~/components/common/lnb'
   export default {
-    components: {category},
+    components: {lnb},
     async asyncData ({ app }) {
       const data = await app.$axios.$get('categories?blogId=1') // 아직 블로그id 관리 X
       // console.log(data)
