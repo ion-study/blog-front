@@ -120,18 +120,18 @@
         }
       },
       registCat () {
-        this.$axios.$post('categories', this.registCat).then(this.initData)
+        if (this.tempCat.orderNum < 1 || !this.tempCat.orderNum) this.tempCat.orderNum = 1
+        this.$axios.$get(`categories/${this.tempCat.parentCatId}`).then((parentCat)=>{
+          this.tempCat.depth = parentCat.depth + 1
+          this.$axios.$post('categories', this.tempCat).then(this.initData)
+        })
       },
       updateCat () {
-        let bodyData = {
-          "catId": this.tempCat.catId,
-          "catName": this.tempCat.catName,
-          "orderNum": this.tempCat.orderNum,
-          "depth": this.tempCat.depth,
-          "blogId": this.tempCat.blogId,
-          "parentCatId":  this.tempCat.parentCatId
-        }
-        this.$axios.$patch('categories', bodyData).then(this.initData)
+        if (this.tempCat.orderNum < 1 || !this.tempCat.orderNum) this.tempCat.orderNum = 1
+        this.$axios.$get(`categories/${this.tempCat.parentCatId}`).then((parentCat)=>{
+          this.tempCat.depth = parentCat.depth + 1
+          this.$axios.$patch('categories', this.tempCat).then(this.initData)
+        })
       },
       deletCat () {
         let deleteConform = confirm("해당 카테고리를 삭제 하시겠습니까?")
