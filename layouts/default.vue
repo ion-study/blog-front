@@ -67,22 +67,26 @@ html {
 
 .container {
   margin: 0 auto;
-  //min-height: 100vh;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 .header{
   width:100%;
-  margin: 20px 0;
-  border:1px solid #acacac;
+  margin-bottom:20px;
+  padding:30px 0;
+  border-bottom:1px solid #acacac;
+}
+.header h2 a{
+  color:#3b8070;
 }
 .footer{
   width:100%;
-  margin: 20px 0;
-  padding: 10px;
+  margin-top: 20px;
+  padding:30px 20px;
   text-align:right;
-  border:1px solid #acacac;
+  border-top:1px solid #acacac;
+  border-bottom:1px solid #acacac;
 }
 
 .c-green{
@@ -96,5 +100,30 @@ padding-top:30px;
 }
 ul li{
 list-style:none;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .header{
+    max-width:320px;
+    margin:0 auto;
+    margin-bottom:20px;
+  }
+  .footer{
+    max-width:320px;
+    margin:20px auto;
+  }
+  .footer h5{
+    padding:10px;
+  }
 }
 </style>

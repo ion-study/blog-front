@@ -1,14 +1,7 @@
 <template>
   <div class="container">
-    <h2 class="reg-tit">
-      게시글 수정 (미완)
-    </h2>
     <div class="reg-contents">
-      {{ postObj }}
-      <br>
-      <br>
-      {{ updateObj }}
-      <div class="board-box">
+      <b-card header="게시글 수정" class="mb-2 board-box" border-variant="info" align="left">
         <table>
           <tbody>
             <tr>
@@ -26,12 +19,13 @@
           </tbody>
         </table>
         <!-- 하단 버튼 -->
-        <div class="mt-3">
-          <b-button-group>
-            <b-button variant="info" @click="edit">저장</b-button>
-            <b-button variant="secondary" @click="$router.back()">취소</b-button>
-          </b-button-group>
-        </div>
+
+      </b-card>
+      <div class="mt-3">
+
+        <b-button variant="outline-primary" @click="edit">수정</b-button>
+        <b-button variant="outline-danger" @click="$router.back()">취소</b-button>
+
       </div>
     </div>
   </div>
@@ -77,11 +71,6 @@ export default {
 </script>
 
 <style>
-  .reg-tit {
-    text-align: left;
-    padding: 20px 0;
-    border-bottom: 1px solid #acacac;
-  }
 
   .reg-contents {
     width: 100%;
@@ -92,8 +81,8 @@ export default {
 
   .board-box {
     width: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
+    max-width: 80rem;
+    margin: auto;
   }
 
   .board-box table {
@@ -111,9 +100,16 @@ export default {
   .board-box table tr td:first-child {
     width: 120px;
   }
-
-  .button-wrap {
-    margin: 10px 0;
+  #contents{
+    width:100%;
+    height:350px;
   }
+  td{
+    padding:0 20px;
+  }
+  td input {
+    width: 100%;
+  }
+
 
 </style>

@@ -5,7 +5,7 @@
         <div class="aside">
           <div class="profile">
             <p class="image">
-              <img src="~assets/img/man.png" />
+              <img src="~assets/img/man.png" alt="user-icon"/>
             </p>
             <p class="profile-txt">
               <span>홍길동</span>의 블로그 입니다.
@@ -110,42 +110,59 @@
     margin-left: 0;
   }
 
-  .menu-category {
-    margin: 20px 0;
-    border-right: 1px solid #acacac;
-    border-left: 1px solid #acacac;
-  }
 
   .contents {
     width: 80%;
     border: 1px solid #acacac;
     float: right;
   }
-
+  .board-msg{
+    height: 450px;
+    padding: 150px 0;
+  }
   .board-msg p span {
     font-weight: bold;
   }
 
-  .title {
-    font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    display: block;
-    font-weight: 300;
-    font-size: 100px;
-    color: #35495e;
-    letter-spacing: 1px;
-  }
-
-  .subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
-  }
 
   .links {
     padding-top: 15px;
+
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+
+
+  }
+
+  @media (min-width: 481px) and (max-width: 767px) {
+
+
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .contents-box {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .aside{
+      width:100%;
+    }
+    .aside .profile {
+      max-width: 320px;
+      margin:0 auto;
+    }
+    .board-msg p {
+      padding-top:0;
+    }
+    .contents {
+      width: 100%;
+      max-width:320px;
+      padding:0 10px;
+      border: 1px solid #acacac;
+      font-size:15px;
+    }
 
   }
 </style>
