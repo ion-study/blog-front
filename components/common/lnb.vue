@@ -1,8 +1,8 @@
 <template>
   <div class="menu-category">
-    <ul>
-      <li v-for="cat in catList" :key="cat.catId">{{cat.catName}}</li>
-    </ul>
+    <b-list-group>
+      <b-list-group-item button v-for="cat in catList" :key="cat.catId">{{cat.catName}}</b-list-group-item>
+    </b-list-group>
   </div>
 </template>
 

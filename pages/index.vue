@@ -87,7 +87,9 @@
     min-height: 185px;
     line-height: 185px;
   }
-
+  .menu-category{
+    padding:30px 0;
+  }
   .profile-txt {
     min-height: 20px;
     text-align: left;
@@ -105,12 +107,9 @@
   .btn-wrap .links:nth-child(2) {
     margin-left: -15px;
   }
-
   .btn-wrap .links {
     margin-left: 0;
   }
-
-
   .contents {
     width: 80%;
     border: 1px solid #acacac;
@@ -123,24 +122,40 @@
   .board-msg p span {
     font-weight: bold;
   }
-
-
   .links {
     padding-top: 15px;
-
   }
 
-  @media (min-width: 768px) and (max-width: 1024px) {
-
-
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .contents-box {
+      max-width: 768px;
+      margin: 0 auto;
+    }
+    .aside{
+      width:100%;
+      max-width: 768px;
+    }
+    .aside .profile {
+      width:100%;
+    }
+    .aside .profile .btn-wrap .links{
+      float:left;
+      margin:0 20px;
+    }
+    .aside .menu-category {
+      width:100%;
+      max-width:768px;
+    }
+    .contents {
+      width: 100%;
+      max-width:768px;
+      padding:0 10px;
+      border: 1px solid #acacac;
+      font-size:15px;
+    }
   }
 
-  @media (min-width: 481px) and (max-width: 767px) {
-
-
-  }
-
-  @media (min-width: 320px) and (max-width: 480px) {
+  @media (min-width: 320px) and (max-width: 767px) {
     .contents-box {
       max-width: 320px;
       margin: 0 auto;

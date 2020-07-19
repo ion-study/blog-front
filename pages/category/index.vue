@@ -5,11 +5,11 @@
         <b-col md="6">
           <b-card-body title="카테고리 목록" class="c-body-wrap1">
             <b-card-text class="card-text1">
-              <p>* 항목 클릭 시, 우측 카테고리 상세 설정 영역 노출</p>
-              <ul class="cat-list">
-                <li v-for="cat in catList" :key="cat.catId" @click="selCat(cat)">{{cat.catName}}</li>
-                <li><b-button variant="success" @click="selCat()">+ 메뉴 추가</b-button></li>
-              </ul>
+              <b-list-group>
+                <b-list-group-item v-for="cat in catList" :key="cat.catId" @click="selCat(cat)">{{cat.catName}}</b-list-group-item>
+                <b-list-group-item><b-button variant="success" @click="selCat()" >+ 메뉴 추가</b-button></b-list-group-item>
+              </b-list-group>
+
             </b-card-text>
           </b-card-body>
         </b-col>
@@ -18,6 +18,8 @@
             <b-card-text class="card-text2">
               <div class="board-box">
                 <template v-if="tempCat">
+                  <p v-if="setFlag==='MOD'">* 수정을 원하는 카테고리 내용을 변경하세요.</p>
+                  <p v-if="setFlag==='REG'">* 등록을 원하는 카테고리 내용을 입력하세요.</p>
                   <table>
                     <tbody>
                     <tr>
@@ -48,23 +50,21 @@
                     </tbody>
                   </table>
                   <div class="mt-3">
-                    <b-btn-group>
+
                       <template v-if="setFlag==='MOD'">
-                        <b-btn-group>
-                          <b-button @click="initData">취소</b-button>
-                          <b-button variant="danger" @click="deletCat">삭제</b-button>
-                          <b-button variant="success" @click="updateCat">수정</b-button>
-                        </b-btn-group>
+                        <b-button varient="secondary" @click="initData">취소</b-button>
+                        <b-button variant="danger" @click="deletCat">삭제</b-button>
+                        <b-button variant="success" @click="updateCat">수정</b-button>
                       </template>
                       <tempate v-else-if="setFlag==='REG'">
-                        <b-button variant="outline-secondary" @click="initData">취소</b-button>
-                        <b-button variant="outline-success" @click="registCat">추가</b-button>
+                        <b-button variant="secondary" @click="initData">취소</b-button>
+                        <b-button variant="success" @click="registCat">등록</b-button>
                       </tempate>
-                    </b-btn-group>
+
                   </div>
                 </template>
-                <div v-else>
-                  * 수정 할 카테고리를 선택하세요.
+                <div v-else class="dfault-txt">
+                  * 메뉴 추가 버튼 또는 리스트 항목 클릭 시, <br>카테고리 상세 설정 영역 활성화</p>
                 </div>
               </div>
 
@@ -155,7 +155,7 @@
     height: 100%;
   }
   .c-body-wrap1 .card-text1{
-    margin:50px 0;
+    margin:30px 0;
   }
   .c-body-wrap1 .card-text1 ul{
     padding-left:0;
@@ -164,7 +164,7 @@
     margin-top:10px;
   }
   .c-body-wrap2 .card-text2{
-    margin:50px 0;
+    margin:30px 0;
   }
   table{
     margin:0 auto;
@@ -182,6 +182,15 @@
   }
   tbody tr td:nth-child(2) input{
     width:100%;
+  }
+
+  .cat-list li{
+    display:block;
+    background: #acacac;
+  }
+
+  .dfault-txt{
+    margin:120px 0;
   }
 
   @media (max-width:767px) {

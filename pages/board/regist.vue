@@ -6,7 +6,7 @@
           <tbody>
           <tr>
             <td><label for="userId">* 아이디</label></td>
-            <td colspan="2"><input id="userId" v-model="registObj.userId" type="text" name="userId"></td>
+            <td><input id="userId" v-model="registObj.userId" type="text" name="userId"></td>
           </tr>
           <tr>
             <td><label for="subject">* 제목</label></td>
