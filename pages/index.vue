@@ -87,9 +87,7 @@
     min-height: 185px;
     line-height: 185px;
   }
-  .menu-category{
-    padding:30px 0;
-  }
+
   .profile-txt {
     min-height: 20px;
     text-align: left;
@@ -154,13 +152,14 @@
       font-size:15px;
     }
   }
+  @media (min-width:768px) and (max-width:1199px) {
 
+  }
   @media (min-width: 320px) and (max-width: 767px) {
     .contents-box {
       max-width: 320px;
       margin: 0 auto;
     }
-
     .aside{
       width:100%;
     }

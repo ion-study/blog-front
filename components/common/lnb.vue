@@ -18,5 +18,26 @@
 </script>
 
 <style scoped>
+  .menu-category{
+    width: 100%;
+    display: inline-block;
+    max-width: 230px;
+    float: left;
+    margin:30px 0;
+  }
 
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .menu-category{
+      float: inherit;
+      max-width:768px;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    .menu-category{
+      float: inherit;
+      max-width:320px;
+
+    }
+  }
 </style>

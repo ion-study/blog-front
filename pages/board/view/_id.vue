@@ -1,10 +1,7 @@
 <template>
   <div class="container">
-    <h2 class="reg-tit">
-      게시글 조회
-    </h2>
     <div class="reg-contents">
-      <div class="board-box">
+      <b-card header="게시글 조회" class="mb-2 board-box" border-variant="info" align="left">
         <table>
           <tbody>
             <tr>
@@ -30,14 +27,12 @@
           </tbody>
         </table>
         <!-- 하단 버튼 -->
-        <div class="mt-3">
-          <b-button-group>
-            <b-button variant="info" @click="editPost">수정</b-button>
-            <b-button variant="warning" @click="deletePost">삭제</b-button>
-            <b-button variant="secondary" @click="$router.back()">뒤로</b-button>
-          </b-button-group>
+        <div class="mt-3" style="text-align: center;">
+            <b-button variant="outline-primary" @click="editPost">수정</b-button>
+            <b-button variant="outline-danger" @click="deletePost">삭제</b-button>
+            <b-button variant="outline-dark" @click="$router.back()">뒤로</b-button>
         </div>
-      </div>
+      </b-card>
     </div>
   </div>
 </template>
@@ -81,7 +76,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .container{
+    width:100%;
+    max-width:850px;
+    display: inline-block;
+  }
   .reg-tit {
     text-align: left;
     padding: 20px 0;
@@ -97,7 +97,7 @@ export default {
 
   .board-box {
     width: 100%;
-    max-width: 1024px;
+    max-width: 80rem;
     margin: 0 auto;
   }
 
@@ -114,7 +114,7 @@ export default {
   }
 
   .board-box table tr td:first-child {
-    width: 120px;
+    width: 170px;
   }
 
   .button-wrap {

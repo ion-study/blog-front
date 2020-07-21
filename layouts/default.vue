@@ -102,16 +102,6 @@ ul li{
 list-style:none;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-
-
-}
-
-@media (min-width: 481px) and (max-width: 767px) {
-
-
-}
-
 @media (min-width: 320px) and (max-width: 480px) {
   .header{
     max-width:320px;
@@ -125,5 +115,6 @@ list-style:none;
   .footer h5{
     padding:10px;
   }
+
 }
 </style>

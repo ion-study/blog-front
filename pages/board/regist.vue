@@ -75,7 +75,13 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
+
+  .container{
+    display: inline-block;
+    width: 100%;
+    max-width: 850px;
+  }
 
   .reg-contents {
     width: 100%;
@@ -98,7 +104,7 @@ export default {
   }
 
   .board-box table tr td:first-child {
-    width: 120px;
+    width: 170px;
   }
   #contents{
     width:100%;

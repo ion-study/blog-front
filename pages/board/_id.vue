@@ -1,19 +1,23 @@
 <template>
-  <div>
+  <div class="container">
     <div class="reg-contents">
       <b-card :header="cat.catName" class="mb-2 board-box" border-variant="info" align="left">
         <p v-if="boardList.length === 0">게시글이 없습니다.</p>
-        <ul v-else>
-          <li v-for="post in boardList" :key="post.boardId">
+        <table v-else>
+          <tr v-for="post in boardList" :key="post.boardId">
+            <td class="td-a">
             <nLink :to="`/board/view/${post.boardId}`">
               [{{ post.boardId }}] / {{ post.userId }} / {{ post.subject }} / {{ post.createdDate }}
             </nLink>
-            <span class="ml-3">
+            </td>
+            <td class="td-b">
+            <span class="ml-3 btn-wrap">
               <b-button variant="outline-danger" @click="deletePost(post.boardId)">삭제</b-button>
               <b-button variant="outline-primary" @click="$router.push(`/board/edit/${post.boardId}`)">수정</b-button>
             </span>
-          </li>
-        </ul>
+            </td>
+          </tr>
+        </table>
       </b-card>
       <div class="mt-3">
       </div>
@@ -71,5 +75,19 @@
 </script>
 
 <style scoped>
+  .td-a{
+    width:80%;
+    border:1px solid #acacac;
+  }
+  .td-b{
+    width:20%;
+  }
+
+  .container{
+    display: inline-block;
+    width: 100%;
+    max-width: 850px;
+    margin-top:30px;
+  }
 
 </style>
