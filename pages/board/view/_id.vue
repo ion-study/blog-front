@@ -110,10 +110,11 @@ export default {
 
   .board-box table tr td {
     border: 1px solid #acacac;
+    padding:0 20px;
   }
 
   .board-box table tr td:first-child {
-    width: 170px;
+    width: 200px;
   }
 
   .button-wrap {
