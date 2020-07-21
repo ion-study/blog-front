@@ -92,7 +92,6 @@ export default {
     width: 100%;
     margin: 0 auto;
     padding: 30px 0;
-
   }
 
   .board-box {

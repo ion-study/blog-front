@@ -76,13 +76,17 @@
 
 <style scoped>
   .td-a{
+
     width:80%;
     border:1px solid #acacac;
   }
   .td-b{
     width:20%;
   }
-
+  .td-a a{
+    margin-left:20px;
+    color:#212529;
+  }
   .container{
     display: inline-block;
     width: 100%;
