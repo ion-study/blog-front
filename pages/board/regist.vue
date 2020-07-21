@@ -9,8 +9,16 @@
             <td><input id="userId" v-model="registObj.userId" type="text" name="userId"></td>
           </tr>
           <tr>
+            <td><label for="userId">* 카테고리 선택</label></td>
+            <td>
+              <select name="catId" id="catId" v-model="registObj.catId">
+                <option v-for="(cat,idx) in catList" :value="cat.catId" :selected="idx===0">{{cat.catName}}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
             <td><label for="subject">* 제목</label></td>
-            <td><input id="subject" v-model="registObj.subject" type="text" value="" name="subject"></td>
+            <td><input id="subject" v-model="registObj.subject" type="text" name="subject"></td>
           </tr>
           <tr>
             <td><label for="contents">* 내용</label></td>
@@ -29,14 +37,25 @@
 <script>
 export default {
   name: 'Regist',
+  async asyncData ({ app, params }) {
+    const catData = await app.$axios.$get(`categories?blogId=1`)
+    return {
+      catList: catData
+    }
+  },
   data () {
     return {
+      catList: [],
       registObj: {
         userId: '',
+        catId:'',
         subject: '',
-        contents: ''
+        contents: '',
       }
     }
+  },
+  mounted () {
+    this.registObj.catId = this.catList[0].catId
   },
   methods: {
     validate () {
@@ -48,9 +67,7 @@ export default {
     },
     regist () {
       if (this.validate()) {
-        console.log('regist')
         this.$axios.$post('boards', this.registObj).then(() => {
-          console.log('success')
           this.$router.push('/board')
         })
       }

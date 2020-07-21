@@ -11,10 +11,10 @@
 <script>
   import lnb from '~/components/common/lnb'
   export default {
-    name: "board",
     components: {lnb},
     async asyncData ({ app }) {
       const data = await app.$axios.$get('categories?blogId=1') // 아직 블로그id 관리 X
+      // console.log(data)
       return {
         catList: data
       }

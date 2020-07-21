@@ -16,6 +16,10 @@
               <td>{{ postObj.userId }}</td>
             </tr>
             <tr>
+              <td>카테고리</td>
+              <td>{{ catName }}</td>
+            </tr>
+            <tr>
               <td>제목</td>
               <td>{{ postObj.subject }}</td>
             </tr>
@@ -30,7 +34,7 @@
           <b-button-group>
             <b-button variant="info" @click="editPost">수정</b-button>
             <b-button variant="warning" @click="deletePost">삭제</b-button>
-            <b-button variant="secondary" @click="$router.push('/board')">목록으로</b-button>
+            <b-button variant="secondary" @click="$router.back()">뒤로</b-button>
           </b-button-group>
         </div>
       </div>
@@ -46,14 +50,18 @@ export default {
   },
   async asyncData ({ app, params }) {
     const data = await app.$axios.$get(`boards/${params.id}`)
+    const cat = await app.$axios.$get(`categories/${data.catId}`)
+
     // console.log(data)
     return {
-      postObj: data
+      postObj: data,
+      catName: cat.catName
     }
   },
   data () {
     return {
-      postObj: {}
+      postObj: {},
+      catName: ''
     }
   },
   methods: {

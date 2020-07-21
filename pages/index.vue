@@ -17,7 +17,7 @@
                 </nuxt-link>
               </div>
               <div class="links pb30">
-                <nuxt-link to="/category" class="button--grey">
+                <nuxt-link to="/category/setup" class="button--grey">
                   카테고리 관리
                 </nuxt-link>
               </div>

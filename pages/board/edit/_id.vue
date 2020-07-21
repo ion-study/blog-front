@@ -9,6 +9,14 @@
               <td>{{ postObj.userId }}</td>
             </tr>
             <tr>
+              <td>카테고리</td>
+              <td>
+                <select name="catId" id="catId" v-model="updateObj.catId">
+                  <option v-for="(cat,idx) in catList" :value="cat.catId" :selected="idx===0">{{cat.catName}}</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
               <td><label for="subject">제목</label></td>
               <td><input id="subject" v-model="updateObj.subject" type="text" value="" name="subject"></td>
             </tr>
@@ -22,10 +30,8 @@
 
       </b-card>
       <div class="mt-3">
-
         <b-button variant="outline-primary" @click="edit">수정</b-button>
         <b-button variant="outline-danger" @click="$router.back()">취소</b-button>
-
       </div>
     </div>
   </div>
@@ -39,30 +45,34 @@ export default {
   },
   async asyncData ({ app, params }) {
     const data = await app.$axios.$get(`boards/${params.id}`)
+    const catData = await app.$axios.$get(`categories?blogId=1`)
     // console.log(data)
     return {
-      postObj: data
+      postObj: data,
+      catList: catData
     }
   },
   data () {
     return {
+      catList: [],
       postObj: {},
       updateObj: {
+        boardId: '',
         subject: '',
-        contents: ''
+        contents: '',
+        catId: ''
       }
     }
   },
   created () {
+    this.updateObj.boardId = this.postObj.boardId
     this.updateObj.subject = this.postObj.subject
     this.updateObj.contents = this.postObj.contents
+    this.updateObj.catId = this.postObj.catId
   },
   methods: {
     edit () {
-      // 오류
-      console.log('edit')
-      this.$axios.$patch(`boards/${this.postObj.boardId}`, this.updateObj).then(() => {
-        console.log('success')
+      this.$axios.$patch(`boards`, this.updateObj).then(() => {
         this.$router.push('/board')
       })
     }
