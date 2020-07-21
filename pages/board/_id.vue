@@ -2,7 +2,8 @@
   <div>
     <div class="reg-contents">
       <b-card :header="cat.catName" class="mb-2 board-box" border-variant="info" align="left">
-        <ul>
+        <p v-if="boardList.length === 0">게시글이 없습니다.</p>
+        <ul v-else>
           <li v-for="post in boardList" :key="post.boardId">
             <nLink :to="`/board/view/${post.boardId}`">
               [{{ post.boardId }}] / {{ post.userId }} / {{ post.subject }} / {{ post.createdDate }}
@@ -40,7 +41,7 @@
     data () {
       return {
         catObj: {},
-        boradList: []
+        boardList: []
       }
     },
     methods: {

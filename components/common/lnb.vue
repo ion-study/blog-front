@@ -1,7 +1,7 @@
 <template>
   <div class="menu-category">
     <b-list-group>
-      <b-list-group-item button v-for="cat in catList" :key="cat.catId" @click="$router.push(`/category/${cat.catId}`)">{{cat.catName}}</b-list-group-item>
+      <b-list-group-item button v-for="cat in catList" :key="cat.catId" @click="$router.push(`/board/${cat.catId}`)">{{cat.catName}}</b-list-group-item>
     </b-list-group>
   </div>
 </template>

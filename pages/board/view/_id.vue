@@ -25,7 +25,7 @@
             </tr>
             <tr>
               <td>내용</td>
-              <td>{{ postObj.contents }}</td>
+              <td><pre>{{ postObj.contents }}</pre></td>
             </tr>
           </tbody>
         </table>
