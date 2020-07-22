@@ -5,11 +5,9 @@
         <b-col md="6">
           <b-card-body title="카테고리 목록" class="c-body-wrap1">
             <b-card-text class="card-text1">
-              <b-list-group>
-                <b-list-group-item v-for="cat in catList" :key="cat.catId" @click="selCat(cat)">{{cat.catName}}</b-list-group-item>
-                <b-list-group-item><b-button variant="success" @click="selCat()" >+ 메뉴 추가</b-button></b-list-group-item>
-              </b-list-group>
-
+              <lnb setup :catList="catList"
+                   @sel-cat="selCat" />
+              <b-button variant="success" class="mt-3" @click="selCat()" >+ 메뉴 추가</b-button>
             </b-card-text>
           </b-card-body>
         </b-col>
@@ -25,56 +23,51 @@
                     <tr>
                       <td>상위 카테고리 선택</td>
                       <td>
-                        <select v-model="tempCat.parentCatId">
+                        <p v-if="tempCat.child">상위카테고리 지정 불가 <br><small>하위카테고리가 있을 경우 상위카테고리를 지정 할 수 없습니다.</small></p>
+                        <select v-else v-model="tempCat.parentCatId">
                           <option :value="0">선택 안함</option>
-                          <option :value="cat.catId" v-for="cat in catList" :disabled="cat.catId === tempCat.catId">{{cat.catName}}</option>
+                          <option :value="cat.catId" v-for="cat in catList" v-if="cat.depth==0" :disabled="cat.catId === tempCat.catId">{{cat.catName}}</option>
                         </select>
                       </td>
                     </tr>
                     <tr>
-                      <td><label for="catName">카테고리 이름</label></td>
+                      <td><label for="catName">* 카테고리 이름</label></td>
                       <td><input id="catName" v-model="tempCat.catName" type="text" name="catName"></td>
                     </tr>
                     <tr>
-                      <td><label for="orderNum">정렬</label></td>
-                      <td><input id="orderNum" v-model="tempCat.orderNum" type="text" name="orderNum"></td>
+                      <td><label for="orderNum">* 정렬</label></td>
+                      <td><input id="orderNum" v-model="tempCat.orderNum" type="number" min="0" name="orderNum"></td>
                     </tr>
-                    <tr>
-                      <td><label for="depth">뎁스</label></td>
-                      <td><input id="depth" v-model="tempCat.depth" type="number" name="depth"></td>
-                    </tr>
-                    <tr>
-                      <td><label for="blogId">블로그ID</label></td>
-                      <td><input id="blogId" v-model="tempCat.blogId" type="number" name="blogId" disabled></td>
-                    </tr>
+<!--                    <tr>-->
+<!--                      <td><label for="depth">뎁스</label></td>-->
+<!--                      <td><input id="depth" v-model="tempCat.depth" type="number" name="depth" disabled></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <td><label for="blogId">블로그ID</label></td>-->
+<!--                      <td><input id="blogId" v-model="tempCat.blogId" type="number" name="blogId" disabled></td>-->
+<!--                    </tr>-->
                     </tbody>
                   </table>
                   <div class="mt-3">
-
                       <template v-if="setFlag==='MOD'">
                         <b-button varient="secondary" @click="initData">취소</b-button>
-                        <b-button variant="danger" @click="deletCat">삭제</b-button>
+                        <b-button variant="danger" @click="deleteCat">삭제</b-button>
                         <b-button variant="success" @click="updateCat">수정</b-button>
                       </template>
-                      <tempate v-else-if="setFlag==='REG'">
+                      <template v-else-if="setFlag==='REG'">
                         <b-button variant="secondary" @click="initData">취소</b-button>
                         <b-button variant="success" @click="registCat">등록</b-button>
-                      </tempate>
-
+                      </template>
                   </div>
                 </template>
                 <div v-else class="dfault-txt">
-                  * 메뉴 추가 버튼 또는 리스트 항목 클릭 시, <br>카테고리 상세 설정 영역 활성화</p>
+                  * 메뉴 추가 버튼 또는 리스트 항목 클릭 시, <br>카테고리 상세 설정 영역 활성화
                 </div>
               </div>
-
             </b-card-text>
           </b-card-body>
         </b-col>
       </b-row>
-
-
-
     </b-card>
   </div>
 </template>
@@ -84,7 +77,6 @@
     components: {lnb},
     async asyncData ({app}) {
       const data = await app.$axios.$get('categories?blogId=1') // 아직 블로그id 관리 X
-      // console.log(data)
       return {
         catList: data,
         setFlag: 'MOD'
@@ -94,13 +86,19 @@
       return {
         catList: [],
         tempCat: null,
-        parentCatOpts: []
+        setFlag: 'MOD'
+      }
+    },
+    computed: {
+      bodyData () {
+        if (this.tempCat) delete this.tempCat.child
+        return this.tempCat
       }
     },
     methods: {
       initData () {
-        this.$axios.$get('categories?blogId=1').then((res)=>{
-          this.catList = res
+        this.$axios.$get('categories?blogId=1').then((data)=>{
+          this.catList = data
           this.tempCat = null
         })
       },
@@ -113,30 +111,43 @@
             parentCatId: 0,
             catName: '',
             orderNum: 1, // 기본값
-            depth: 1, // 기본값
+            depth: 0, // 기본값
             blogId: 1, // 블로그ID 고정값 (추후 개발 예정)
           }
           this.setFlag = 'REG'
         }
       },
+      validate () {
+        if (!this.bodyData.catName) {
+          alert('필수 입력값(*)을 모두 입력하세요.')
+          return false
+        }
+        return true
+      },
       registCat () {
-        if (this.tempCat.orderNum < 1 || !this.tempCat.orderNum) this.tempCat.orderNum = 1
-        this.$axios.$get(`categories/${this.tempCat.parentCatId}`).then((parentCat)=>{
-          this.tempCat.depth = parentCat.depth + 1
-          this.$axios.$post('categories', this.tempCat).then(this.initData)
-        })
+        if (this.validate()){
+          this.$axios.$get(`categories/${this.tempCat.parentCatId}`).then((parentCat)=>{
+            this.tempCat.depth = parentCat.catId==0||!parentCat.catId ? 0 : parentCat.depth + 1
+            this.$axios.$post('categories', this.bodyData).then(this.initData)
+          })
+        }
       },
       updateCat () {
-        if (this.tempCat.orderNum < 1 || !this.tempCat.orderNum) this.tempCat.orderNum = 1
-        this.$axios.$get(`categories/${this.tempCat.parentCatId}`).then((parentCat)=>{
-          this.tempCat.depth = parentCat.depth + 1
-          this.$axios.$patch('categories', this.tempCat).then(this.initData)
-        })
+        if (this.validate()){
+          this.$axios.$get(`categories/${this.tempCat.parentCatId}`).then((parentCat)=>{
+            this.tempCat.depth = parentCat.catId==0||!parentCat.catId ? 0 : parentCat.depth + 1
+            this.$axios.$patch('categories', this.bodyData).then(this.initData)
+          })
+        }
       },
-      deletCat () {
+      deleteCat () {
         let deleteConform = confirm("해당 카테고리를 삭제 하시겠습니까?")
         if (deleteConform) {
-          this.$axios.$delete(`categories/${this.tempCat.catId}?blogId=1`).then(this.initData)
+          this.$axios.$delete(`categories/${this.tempCat.catId}?blogId=1`)
+            .then(this.initData)
+            .catch((err)=>{
+              console.log(err.status)
+            })
         }
       }
     }

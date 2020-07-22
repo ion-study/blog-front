@@ -73,7 +73,7 @@ export default {
   methods: {
     edit () {
       this.$axios.$patch(`boards`, this.updateObj).then(() => {
-        this.$router.push('/board')
+        this.$router.push(`/board/${this.updateObj.catId}`)
       })
     }
   }

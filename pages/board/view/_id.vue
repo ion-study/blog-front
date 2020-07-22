@@ -68,7 +68,7 @@ export default {
       if(deleteConform)  {
         this.$axios.$delete(`boards/${this.postObj.boardId}`).then(()=>{
           alert("게시글이 성공적으로 삭제되었습니다. 목록으로 이동합니다.")
-          this.$router.push('/board')
+          this.$router.push(`/board/${this.registObj.catId}`)
         })
       }
     }

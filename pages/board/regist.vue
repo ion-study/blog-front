@@ -36,7 +36,6 @@
 </template>
 <script>
 export default {
-  name: 'Regist',
   async asyncData ({ app, params }) {
     const catData = await app.$axios.$get(`categories?blogId=1`)
     return {
@@ -68,7 +67,7 @@ export default {
     regist () {
       if (this.validate()) {
         this.$axios.$post('boards', this.registObj).then(() => {
-          this.$router.push('/board')
+          this.$router.push(`/board/${this.registObj.catId}`)
         })
       }
     }
